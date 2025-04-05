@@ -43,7 +43,7 @@ func (c *SOCache) HandleSubscribed(msg *gcsdkm.CMsgSOCacheSubscribed) error {
 	var retErr error
 	for _, obj := range msg.GetObjects() {
 		typeId := obj.GetTypeId()
-		if typeId == 0 || typeId == 2012 {
+		if typeId == 0 || typeId == 2012 || typeId == 2016 {
 			continue
 		}
 
