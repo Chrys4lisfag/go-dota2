@@ -42,11 +42,12 @@ func (c *SOCache) GetContainerForTypeID(id uint32) (*SOCacheContainer, error) {
 func (c *SOCache) HandleSubscribed(msg *gcsdkm.CMsgSOCacheSubscribed) error {
 	var retErr error
 	for _, obj := range msg.GetObjects() {
-		if obj.GetTypeId() == 0 {
+		typeId := obj.GetTypeId()
+		if typeId == 0 || typeId == 2012 {
 			continue
 		}
 
-		ctr, err := c.GetContainerForTypeID(uint32(obj.GetTypeId()))
+		ctr, err := c.GetContainerForTypeID(uint32(typeId))
 		if err == nil {
 			err = ctr.HandleSubscribed(msg, obj)
 		}
